@@ -41,7 +41,7 @@ const validate=Yup.object({
             password:'',
             confirmPassword:''
         }}
-    
+    {...props}
         validationSchema={validate}
         >
 

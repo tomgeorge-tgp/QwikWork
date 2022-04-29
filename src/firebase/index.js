@@ -1,9 +1,10 @@
 
-import { initializeApp } from "firebase/app";
-import "firebase/auth"
+import {getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword} from "firebase/auth";
 
-// https://firebase.google.com/docs/web/setup#available-libraries
-import { getFirestore } from "firebase/firestore";
+import { initializeApp } from "firebase/app";
+
+//https://firebase.google.com/docs/web/setup#available-libraries
+import { getFirestore ,doc, setDoc, Timestamp } from "firebase/firestore";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -19,7 +20,18 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 
 const db = getFirestore(app);
-export const auth = app.auth();
+const auth = getAuth(app);
+const appAuth = {
+  auth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword
+}
+const appDB = {
+  db,
+  doc,
+  setDoc,
+  Timestamp
+}
 
 export default app
-export {db,auth};
+export {appAuth,appDB};

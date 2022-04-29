@@ -5,10 +5,12 @@ import CustomerSignIn from './pages/CustomerSignin';
 import CustomerSignUp from './pages/CustomerSignup';
 import WorkerSignUp from './pages/WorkerSignup';
 import workerIcon from "./assest/worker.png"
+import {AuthProvider}from "./firebase/AuthContext";
 
 function App()
 {
     return(
+        <AuthProvider>
         <BrowserRouter>
         <div>
             <ul className="d-flex">
@@ -28,6 +30,7 @@ function App()
 
         </div>
         </BrowserRouter>
+        </AuthProvider>
         )
 }
 

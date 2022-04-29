@@ -5,7 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 function TextField({label,...props})
 {
     const [field,meta]=useField(props);
-    console.log(meta)
+    // console.log(meta)
     return(
         <div className="mb-2">
         <label htmlFor={field.name}>{label}</label>

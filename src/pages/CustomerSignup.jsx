@@ -1,4 +1,4 @@
-import React from "react";
+import React  from "react";
 import tool from '../assest/tool.png'
 import Forms from '../components/FormSmall';
 function CustomerSignUp()
