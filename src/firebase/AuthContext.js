@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect } from "react"
 import { appAuth } from "./index.js"
 
 const AuthContext = React.createContext()
-
+``
 export function useAuth() {
   return useContext(AuthContext)
 }
@@ -15,7 +15,7 @@ export function AuthProvider({ children }) {
   function signupWorker(email, password) {
     return createUserWithEmailAndPassword(auth, email, password)
   }
-  function signupCustomer(email, password,phoneNumber) {
+  function signupCustomer(email, password) {
     return createUserWithEmailAndPassword(auth, email, password)
   }
 
@@ -43,12 +43,10 @@ export function AuthProvider({ children }) {
   }
 
   useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged(user => {
+    return auth.onAuthStateChanged(user => {
       setCurrentUser(user)
       setLoading(false)
     })
-
-    return unsubscribe
   }, [])
 
   const value = {

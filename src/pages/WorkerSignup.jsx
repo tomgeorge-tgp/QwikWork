@@ -1,6 +1,7 @@
 import React, { useRef, useState } from "react";
 import { Form, Button, Card, Alert } from "react-bootstrap";
 import tool from "../assest/tool.png";
+import { render } from 'react-dom';
 import { useAuth } from "../firebase/AuthContext";
 import Forms from "../components/Forms";
 import { Link, useHistory } from "react-router-dom";
@@ -26,7 +27,7 @@ import { appDB } from "../firebase";
           <Forms
             onSubmit={async (values, { setSubmitting }) => {
               ///contain values from the sign up form
-
+              console.log(values);
                 if (check(values.password, values.confirmPassword)) {   //to check the password is matching
                   //e.preventDefault();
                   try {
@@ -69,8 +70,8 @@ import { appDB } from "../firebase";
             }}
           />
         </div>
-        <div className="w-100 text-center mt-2">
-          Already have an account? <Link to="/login">Log In</Link>
+        <div className="w-100 text-left mt-2 ">
+          Already have an account? <Link to="/workerSignIn" className="text-decoration-none" >Log In</Link>
         </div>
         <div className="col-sm-7 d-flex justify-content-center align-items-center">
           <img className="img-fluid  w-50  " src={tool} alt="not found" />

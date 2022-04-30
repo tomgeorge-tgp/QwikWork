@@ -4,8 +4,8 @@ import {getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword} fro
 import { initializeApp } from "firebase/app";
 
 //https://firebase.google.com/docs/web/setup#available-libraries
-import { getFirestore ,doc, setDoc, Timestamp } from "firebase/firestore";
-
+import { getFirestore, getDoc ,doc, setDoc, Timestamp } from "firebase/firestore";
+ 
 // Your web app's Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyBVlT8Xasn1dioTimcTERYgBHIsiQ50jp0",
@@ -30,6 +30,7 @@ const appDB = {
   db,
   doc,
   setDoc,
+  getDoc,
   Timestamp
 }
 
