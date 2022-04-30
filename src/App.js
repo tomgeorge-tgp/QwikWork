@@ -5,8 +5,7 @@ import CustomerSignIn from './pages/CustomerSignIn';
 import CustomerSignUp from './pages/CustomerSignup';
 import WorkerSignUp from './pages/WorkerSignup';
 import AppTabs from './appTabs';
-// import WorkerHomePg from './pages/WorkerHomePg';
-// import CustomerHomePg from './pages/CustomerHomePg';
+
 import workerIcon from "./assest/worker.png"
 import {AuthProvider}from "./firebase/AuthContext";
 

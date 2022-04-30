@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect } from "react"
 import { appAuth } from "./index.js"
 
 const AuthContext = React.createContext()
-``
+
 export function useAuth() {
   return useContext(AuthContext)
 }
