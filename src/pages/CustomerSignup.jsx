@@ -6,16 +6,18 @@ import Forms from '../components/FormSmall';
 import { useAuth } from "../firebase/AuthContext";
 import { Link, useHistory } from "react-router-dom";
 import { appDB } from "../firebase";
+import { Redirect } from "react-router-dom";
 
 function CustomerSignUp()
 {
-    const { signupCustomer } = useAuth();
+    const { signupCustomer, loggedIn } = useAuth();
     const [error, setError] = useState("");
-    const [loading, setLoading] = useState(false);
-    const history = useHistory();
+    
+    
     const {db, doc, setDoc } = appDB;
     
-    
+    if(loggedIn)
+       return <Redirect to="/app/home" />    
 
     return(
         <div className="container mt-5">
@@ -24,14 +26,14 @@ function CustomerSignUp()
             <h1 className="my-4 font-weight-bold-display-4">Customer SignUp</h1>
             {error && <Alert variant="danger">{error}</Alert>}
                 <Forms
-                    onSubmit={async (values, { setSubmitting }) => {
+                    onSubmit={async (values, { _setSubmitting }) => {
               ///contain values from the sign up form
 
                 if (check(values.password, values.confirmPassword)) {   //to check the password is matching
                   //e.preventDefault();
                   try {
                     setError("");
-                    setLoading(true);
+                   
                     console.log(values);
                    const {user}=await signupCustomer(values.email, values.password);        //to auth and create a userId
                     console.log(user);
@@ -47,13 +49,13 @@ function CustomerSignUp()
                       catch (err) {
                        console.log(err.message);
                      }
-                    history.push("/");
+                    
                   } catch(err) {
                     setError("Failed to create an account");
                     console.error(err);
                   }
                   
-                  setLoading(false);
+                  
                 }
                 else 
                   {
@@ -63,7 +65,7 @@ function CustomerSignUp()
 
                   }
 
-                setSubmitting(true);
+                // setSubmitting(false);
         
             }}
                 />

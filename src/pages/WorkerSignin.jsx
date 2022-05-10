@@ -1,30 +1,27 @@
-import React, { useRef, useState }from "react";
+import React, { useState }from "react";
 import tool from '../assest/tool.png'
-import SignUp from './WorkerSignup';
 import Form from '../components/FormSignIn';
 import { useAuth } from "../firebase/AuthContext";
-import {BrowserRouter,Link,Switch,Route,Redirect,useHistory} from 'react-router-dom';
+import {Link,Redirect}from 'react-router-dom';
+
 function SignIn()
 { 
-    const { loginCustomer } = useAuth();
-    const [error, setError] = useState("");
-    const [loading, setLoading] = useState(false);
-    const history = useHistory();
-     // const {db, doc, getDoc } = appDB;
+    const { loginWorker, loggedIn } = useAuth();
+    // const [error, setError] = useState("");
+    // const history = useHistory();
+     if (loggedIn) {
+        return <Redirect to="/app/home" />;
+      }
     return(
         <div className="container mt-5">
             <div className="row">
             <div className="col-md-5">
             <h1 className="my-4 font-weight-bold-display-4">Worker SignIn</h1>
                 <Form
-                    onSubmit={async (values, { setSubmitting }) => {
-                        const {user}=await loginCustomer(values.email, values.password); 
-                        console.log(user);
-                         if (user)
-                         {
-                             history.push("/app/home")
-                         }
-
+                    onSubmit={async (values, { _setSubmitting }) => {
+                        const {user}=await loginWorker(values.email, values.password); 
+                            console.log(user);
+                        // setSubmitting(false);
                     } 
                     } 
                 />

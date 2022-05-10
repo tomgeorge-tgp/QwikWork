@@ -1,16 +1,21 @@
 import React, { useContext, useState, useEffect } from "react"
-import { appAuth } from "./index.js"
+import { appAuth } from "./"
 
-const AuthContext = React.createContext()
-
+const AuthContext = React.createContext();
 export function useAuth() {
   return useContext(AuthContext)
 }
 
-export function AuthProvider({ children }) {
-  const [currentUser, setCurrentUser] = useState()
-  const [loading, setLoading] = useState(true)
-  const {auth, createUserWithEmailAndPassword, signInWithEmailAndPassword} = appAuth;
+export function useAuthInit()
+{
+  const [authState, setAuthState] = useState(
+    {
+      loading: true,
+      loggedIn: false,
+      user: null
+    }
+  )
+  const {auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged,signOut} = appAuth;
 
   function signupWorker(email, password) {
     return createUserWithEmailAndPassword(auth, email, password)
@@ -25,45 +30,67 @@ export function AuthProvider({ children }) {
   function loginCustomer(email, password) {
     return signInWithEmailAndPassword(auth, email, password)
   }
-
+   
   function logout() {
-    return auth.signOut()
+    return signOut(auth).then(() => {
+      console.log("Logged out successfully");
+      // Sign-out successful.
+    }).catch((error) => {
+      // An error happened.
+    });
+    
   }
 
-  function resetPassword(email) {
-    return auth.sendPasswordResetEmail(email)
-  }
+  // function resetPassword(email) {
+  //   return auth.sendPasswordResetEmail(email)
+  // }
 
-  function updateEmail(email) {
-    return currentUser.updateEmail(email)
-  }
+  // function updateEmail(email) {
+  //   return currentUser.updateEmail(email)
+  // }
 
-  function updatePassword(password) {
-    return currentUser.updatePassword(password)
-  }
+  // function updatePassword(password) {
+  //   return currentUser.updatePassword(password)
+  // }
 
   useEffect(() => {
-    return auth.onAuthStateChanged(user => {
-      setCurrentUser(user)
-      setLoading(false)
+    return onAuthStateChanged(auth, user => {
+
+      if(user)
+        setAuthState({
+          loading: false,
+          loggedIn: true,
+          user: user
+        })
+      else 
+        setAuthState({
+          loading: false,
+          loggedIn: false,
+          user: null
+        });
     })
   }, [])
 
-  const value = {
-    currentUser,
+  return {
+    loading: authState.loading,
+    loggedIn: authState.loggedIn,
+    currentUser: authState.user,
     loginWorker,
     loginCustomer,
     signupWorker,
     signupCustomer,
     logout,
-    resetPassword,
-    updateEmail,
-    updatePassword
+    // resetPassword,
+    // updateEmail,
+    // updatePassword
   }
+}
+
+export function AuthProvider({ children, value }) {
 
   return (
     <AuthContext.Provider value={value}>
-      {!loading && children}
+      {children}
     </AuthContext.Provider>
   )
 }

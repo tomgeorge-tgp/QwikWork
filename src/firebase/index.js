@@ -1,5 +1,5 @@
 
-import {getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword} from "firebase/auth";
+import {getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, onAuthStateChanged,signOut} from "firebase/auth";
 
 import { initializeApp } from "firebase/app";
 
@@ -24,7 +24,9 @@ const auth = getAuth(app);
 const appAuth = {
   auth,
   createUserWithEmailAndPassword,
-  signInWithEmailAndPassword
+  signInWithEmailAndPassword,
+  onAuthStateChanged,
+  signOut,
 }
 const appDB = {
   db,
