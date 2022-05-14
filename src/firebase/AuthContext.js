@@ -12,7 +12,8 @@ export function useAuthInit()
     {
       loading: true,
       loggedIn: false,
-      user: null
+      user: null,
+      userData:null,
     }
   )
   const {auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged,signOut} = appAuth;
@@ -60,7 +61,8 @@ export function useAuthInit()
         setAuthState({
           loading: false,
           loggedIn: true,
-          user: user
+          user: user,
+          
         })
       else 
         setAuthState({
@@ -75,11 +77,13 @@ export function useAuthInit()
     loading: authState.loading,
     loggedIn: authState.loggedIn,
     currentUser: authState.user,
+    userData:authState.userData,
     loginWorker,
     loginCustomer,
     signupWorker,
     signupCustomer,
     logout,
+    
     // resetPassword,
     // updateEmail,
     // updatePassword

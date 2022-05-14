@@ -1,0 +1,49 @@
+/* .App{
+    width: 100vw;
+    height: 100vh;
+} */
+.sidebar
+{
+    height: 100vh;
+    width:230px;
+    display: flex;
+    /* //background-color:rgb(38, 37, 37); */
+
+}
+.sidebarList{
+    height:auto;
+    padding:0;
+    width:100%;
+    background-color:rgb(48, 46, 46);
+}
+.sidebarList .row{
+    width:100%;
+    height:60px;
+    /* background-color:violet; */
+    /* border:1px solid black; */
+    list-style-type:none;
+    margin:0;
+    display:flex;
+    flex-direction:column row;
+    color:white;
+    justify-content:center;
+    align-items:center;
+    }
+ .sidebarList .row:hover{
+     cursor:pointer;
+     background-color:rgb(73, 73, 73);
+
+ }
+ .sidebarList #active{
+     background-color:#293846;
+ }
+
+.row-#icon{
+    flex:30%;
+    display: center;
+    place-items:center;
+
+} 
+.row #title{
+    flex:70%;
+}

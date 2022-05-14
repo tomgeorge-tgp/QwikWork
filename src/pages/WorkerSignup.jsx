@@ -34,11 +34,13 @@ import { appDB } from "../firebase";
                    const {user}=await signupWorker(values.email, values.password);        //to auth and create a userId
                     console.log(user);
                      try {
-                       const userRef = doc(db, "workers", user.uid);
+                       const userRef = doc(db, "users", user.uid);
                        const userInfo = {
-                         name: values.firstName + values.lastName,
+                         firstName: values.firstName ,
+                         lastName: values.lastName,
                          phoneNumber: values.phoneNo,
                          email: values.email,
+                         category:"worker",
                        }
                        await setDoc(userRef, userInfo);
                        console.log("Registered Successfully!");

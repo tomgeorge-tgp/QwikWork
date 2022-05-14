@@ -38,10 +38,11 @@ function CustomerSignUp()
                    const {user}=await signupCustomer(values.email, values.password);        //to auth and create a userId
                     console.log(user);
                      try {
-                       const userRef = doc(db, "customers", user.uid);
+                       const userRef = doc(db, "users", user.uid);
                        const userInfo = {
                          email: values.email,
                          phoneNumber: values.phoneNo,
+                         category:"customer",
                        }
                        await setDoc(userRef, userInfo);
                        console.log("Registered Successfully!");

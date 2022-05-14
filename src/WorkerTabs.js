@@ -1,26 +1,31 @@
 import React from "react";
 import { Route, Redirect } from "react-router-dom";
-
-import Home from "./pages/Home";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import WorkerHome from "./pages/WorkerHome";
 
   import { useAuth } from "./firebase/AuthContext";
 
-  function AppTabs() {
+  function WorkerTabs() {
     const { loggedIn,logout } = useAuth();
   if (!loggedIn) return <Redirect to="/workerSignIn" />;
-
+   else{
+    
+      //  <Redirect to="/app/Worker" />;
+    console.log("hai");
+   
   return (
     <>
       
-      <Route exact path="/app/home">
-         <p>home</p>
+      
+         <WorkerHome/>
          <button onClick={logout} type="button" className="btn btn-danger">Log Out</button>
-         {/* <Home/> */}
-      </Route>
+        
+      
      </>
       );
+  }  
   } 
+  export default WorkerTabs;
 
 
   
-export default AppTabs;

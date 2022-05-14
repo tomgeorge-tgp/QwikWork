@@ -3,9 +3,11 @@ import {BrowserRouter,Link,Switch,Route,Redirect} from 'react-router-dom';
 import WorkerSignIn from './pages/WorkerSignin';
 import CustomerSignIn from './pages/CustomerSignIn';
 import CustomerSignUp from './pages/CustomerSignup';
+import AppTabs from './AppsTab';
 import WorkerSignUp from './pages/WorkerSignup';
-import AppTabs from './appTabs'; 
-
+import "./components/Css/App.css";
+import WorkerTabs from './WorkerTabs'; 
+import CustomerTabs from'./CustomerTabs';
 import workerIcon from "./assest/worker.png"
 import {useAuthInit, AuthProvider}from "./firebase/AuthContext";
 
@@ -17,13 +19,14 @@ function App()
     return(
         <AuthProvider value={auth}>
         <BrowserRouter>
-        <div>
-            <ul className="d-flex">
+        <div className="wholeBody">
+            <ul className="d-flex navBar">
             {/* <img src={workerIcon}/> */}
-                <li className="p-2 " ><Link to="/workerSignIn">WORKER</Link></li>
-                <li className="p-2 "><Link to="/customerSignIn">CUSTOMER</Link></li>
+                <li className="p-2 " ><Link className='text' to="/workerSignIn">WORKER</Link></li>    {/*npm i @material-ui/core --legacy-peer-deps    npm i @material-ui/icons*/}
+                <li className="p-2 "><Link className='text' to="/customerSignIn">CUSTOMER</Link></li>
             </ul>
-            <Switch>
+            <div className="a">
+            <Switch >
             <Route exact path="/workerSignUp" component={WorkerSignUp} ></Route>
             <Route exact path="/workerSignIn" component={WorkerSignIn}></Route>
             
@@ -31,11 +34,14 @@ function App()
             <Route exact path="/customerSignUp" component={CustomerSignUp}></Route>
 
             <Route  path="/app" component={AppTabs}/>
-            
+            {/* <Route path="/Worker" component={WorkerTabs}/>
+            <Route path="/Customer" component={CustomerTabs}/> */}
             <Redirect path="/" to="/app/home"/>
             
+            {/* <Redirect path="/app/home" to="/app/home/Worker"/>
+            <Redirect path="/app/home" to="/app/home/Customer"/> */}
             </Switch>
-
+            </div>
         </div>
         </BrowserRouter>
         </AuthProvider>

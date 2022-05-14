@@ -1,0 +1,17 @@
+.img-wrapper {
+    overflow: hidden;
+    
+  }
+  a{
+    text-decoration: none;
+  }
+  
+  .card {
+    
+    transition: all 0.3s ease 0s;
+    width: 100%;
+  }
+  .card:hover {
+    transform: scale(1.1);
+    color:brown;
+  }
