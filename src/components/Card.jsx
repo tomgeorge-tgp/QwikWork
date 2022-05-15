@@ -1,14 +1,14 @@
 import React from "react";
 import img from "../assest/tom.jpg";
 import "./Css/Card.css"
-function Cards()
+function Card(props)
 {
     return(<div className="card-box">
         <div className="card">
         <div className="top">
         <div className="title">
-        <h1 className="name">{"TOM GEORGE"}</h1>
-          <h2 className="work">{"Carpenter"}</h2>
+        <h1 className="name">{props.firstName + " " + props.lastName}</h1>
+          <h2 className="work">{props.work}</h2>
         </div>
           
           <img className="circle-img" src={img}  />
@@ -16,8 +16,8 @@ function Cards()
         </div>
         <div className="bottom">
          <div className="info">
-          <p>{"93734824657"}</p>
-          <p>{"tom@1gmail.com"}</p>
+          <p>{props.phoneNo}</p>
+          <p>{props.emailId}</p>
           
          </div>
          <div className="rating">7/10</div>
@@ -26,4 +26,4 @@ function Cards()
 
         </div>)
 }
-export default Cards
+export default Card

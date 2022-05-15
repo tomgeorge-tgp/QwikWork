@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect } from "react"
 import { appAuth } from "./"
-
+import { appDB } from "../firebase";
 const AuthContext = React.createContext();
 export function useAuth() {
   return useContext(AuthContext)
@@ -8,12 +8,12 @@ export function useAuth() {
 
 export function useAuthInit()
 {
+  const { db, doc, getDoc } = appDB;
   const [authState, setAuthState] = useState(
     {
       loading: true,
       loggedIn: false,
       user: null,
-      userData:null,
     }
   )
   const {auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged,signOut} = appAuth;
@@ -54,16 +54,22 @@ export function useAuthInit()
   //   return currentUser.updatePassword(password)
   // }
 
-  useEffect(() => {
-    return onAuthStateChanged(auth, user => {
+  useEffect( () => {
+    return onAuthStateChanged(auth, async (user) => {
 
-      if(user)
-        setAuthState({
+      if(user){
+        const userRef = doc(db, "users", user.uid);
+         const userDoc = await getDoc(userRef);
+         console.log("data:", userDoc.data());
+         const fullUserData = {...user, data: userDoc.data()}
+         console.dir(fullUserData)
+         setAuthState({
           loading: false,
           loggedIn: true,
-          user: user,
+          user: fullUserData,
           
         })
+      }
       else 
         setAuthState({
           loading: false,
@@ -76,8 +82,7 @@ export function useAuthInit()
   return {
     loading: authState.loading,
     loggedIn: authState.loggedIn,
-    currentUser: authState.user,
-    userData:authState.userData,
+    user:authState.user,
     loginWorker,
     loginCustomer,
     signupWorker,

@@ -25,7 +25,7 @@ function App()
                 <li className="p-2 " ><Link className='text' to="/workerSignIn">WORKER</Link></li>    {/*npm i @material-ui/core --legacy-peer-deps    npm i @material-ui/icons*/}
                 <li className="p-2 "><Link className='text' to="/customerSignIn">CUSTOMER</Link></li>
             </ul>
-            <div className="a">
+            
             <Switch >
             <Route exact path="/workerSignUp" component={WorkerSignUp} ></Route>
             <Route exact path="/workerSignIn" component={WorkerSignIn}></Route>
@@ -34,14 +34,11 @@ function App()
             <Route exact path="/customerSignUp" component={CustomerSignUp}></Route>
 
             <Route  path="/app" component={AppTabs}/>
-            {/* <Route path="/Worker" component={WorkerTabs}/>
-            <Route path="/Customer" component={CustomerTabs}/> */}
-            <Redirect path="/" to="/app/home"/>
+           
+            <Redirect path="/" to="/app"/>
             
-            {/* <Redirect path="/app/home" to="/app/home/Worker"/>
-            <Redirect path="/app/home" to="/app/home/Customer"/> */}
             </Switch>
-            </div>
+            
         </div>
         </BrowserRouter>
         </AuthProvider>

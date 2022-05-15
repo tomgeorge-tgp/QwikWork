@@ -12,7 +12,7 @@ function SignIn()
     const [userData, setUserData] = useState({});
 
      if (loggedIn) {
-        return <Redirect to="/app/home/Customer" />;
+        return <Redirect to="/app" />;
       }
     
     

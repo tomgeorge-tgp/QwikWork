@@ -14,7 +14,7 @@ import { appDB } from "../firebase";
   const {db, doc, setDoc} = appDB;
 
    if(loggedIn)
-     return <Redirect to="/app/home" />
+     return <Redirect to="/app" />
 
   return (
     <div className="container mt-5">

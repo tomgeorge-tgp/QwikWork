@@ -9,13 +9,12 @@ import tool from "../assest/tool.png";
 
 function WorkerHome()
 {
-    const { loggedIn,logout } = useAuth();
+    const { loggedIn } = useAuth();
     if (!loggedIn) return <Redirect to="/workerSignIn" />;
        else{
     return(
 
         <>
-            {/* <Route exact path="/app/home/Worker">    */}
       
        <form>
     
@@ -51,7 +50,7 @@ function WorkerHome()
            
              <div className="col-md-2">
                <input
-               //onSubmit={};
+              //  onSubmit={};
                  type="button"
                  className="profile-edit-btn"
                  value="Edit Profile"

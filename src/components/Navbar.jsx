@@ -1,12 +1,13 @@
+import { DriveEtaSharp } from "@material-ui/icons";
 import React from "react";
 import { Navbar,Container,NavDropdown,Form,Button,Nav,FormControl } from 'react-bootstrap';
-
+import "./Css/Navbar.css";
 function NavBar() {
 
   return (<div>
- <Navbar className="navbar"
-   style={{ marginLeft :'12%'}}
-    variant="dark"  bg="dark" expand="lg">
+ <Navbar className="navbar "
+   
+    variant="dark"  bg="transparent" expand="lg">
   <Container fluid>
     {/* <Navbar.Brand href="#">Worker</Navbar.Brand>
     <Navbar.Brand href="#">Customer</Navbar.Brand> */}
@@ -31,15 +32,10 @@ function NavBar() {
           Link
         </Nav.Link> */}
       {/* </Nav> */}
-      <Form className="d-flex ">
+      <Form className="d-flex bar float-right ">
         
-          <div style={{ 
-          display:'flex',
-          paddingLeft:'70vw',
-          float:'right'
           
-          }}>
-                 {/* "d-none d-lg-block"> */}
+                
         <FormControl                     
           type="search"
           placeholder="Search"
@@ -47,9 +43,9 @@ function NavBar() {
           aria-label="Search"
         />
         <Button variant="outline-success">Search</Button>
-        </div>
+        
       </Form>
-    {/* </Navbar.Collapse> */}
+  
   </Container>
 </Navbar>
 </div>

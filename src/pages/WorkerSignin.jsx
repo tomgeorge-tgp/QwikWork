@@ -16,7 +16,7 @@ function SignIn() {
   const [userData, setUserData] = useState({});
 
   if (loggedIn) {
-    return <Redirect to="/app/home/Worker" />;
+    return <Redirect to="/app" />;
   }
   return (
     <div className="container mt-5">
