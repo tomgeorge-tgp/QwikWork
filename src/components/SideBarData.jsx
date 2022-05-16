@@ -5,26 +5,28 @@ import React from 'react';
 
 //import HomeIcon from '@mui/icons-material/Home';
 
+
 export const SidebarData=[
     {
-        title:"Home",
+        title:"Carpenter",
         //icon:<HomeIcon/>,
         link:"/home"
     },
     {
-        title:"Mail",
+        title:"Painter",
         //icon:<HomeIcon/>,
         link:"/home"
     },
     {
-        title:"Contact ",
+        title:"Welder ",
         //icon:<HomeIcon/>,
         link:"/home"
     },
     {
-        title:"Home",
+        title:"Plumber",
        // icon:<HomeIcon/>,
         link:"/home"
     }
+   
 
 ]

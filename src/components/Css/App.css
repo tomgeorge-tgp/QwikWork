@@ -1,28 +1,25 @@
 
 .wholeBody{
     display:inline;
-   
     background-color: aquamarine;
       
 }
 
 .navBar {
     background-color:black;
-    height:50px;
+    height:60px;
     width:100%;
-    /* margin:0; */
     padding:0;
-    
     text-decoration: none;
     list-style-type: none;
 }
-/* .a
+.navBar
 {
-    transform: translate(0px, -55px);
-} */
-
-
+    margin:0;
+}
 .text
 {
+    
     color:white;
+    font-size: 30px;
 }

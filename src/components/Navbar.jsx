@@ -4,8 +4,8 @@ import { Navbar,Container,NavDropdown,Form,Button,Nav,FormControl } from 'react-
 import "./Css/Navbar.css";
 function NavBar() {
 
-  return (<div>
- <Navbar className="navbar "
+  return (<>
+ {/* <Navbar className="navbar "
    
     variant="dark"  bg="transparent" expand="lg">
   <Container fluid>
@@ -32,7 +32,7 @@ function NavBar() {
           Link
         </Nav.Link> */}
       {/* </Nav> */}
-      <Form className="d-flex bar float-right ">
+      {/* <Form className="d-flex bar float-right ">
         
           
                 
@@ -47,8 +47,8 @@ function NavBar() {
       </Form>
   
   </Container>
-</Navbar>
-</div>
+</Navbar> */} 
+</>
 );
 }
 
