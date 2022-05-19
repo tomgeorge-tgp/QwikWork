@@ -9,7 +9,8 @@ import AddressBar from "../components/AddressBar";
 import "../components/Css/CustomerHome.css";
 function HomeC() {
   const [workers, setWorkers] = useState([]);
-   useEffect(() => getData(1, (w) => setWorkers(w)), [])
+  const [values,setValues]=useState([]);
+   useEffect(() => getData(values, (w) => setWorkers(w)), [])
   return (
   <>    
       {/* <Navbar/> */}
@@ -17,7 +18,11 @@ function HomeC() {
       <div className="d-flex">
       <Sidebar/>
       <div>
-      <AddressBar />
+      <AddressBar onSubmit={async (values, { _setSubmitting }) => {
+                   setValues(values);
+                   console.log(values);
+
+                }}/>
       
       <div className="img-wrapper">
       <Container>
@@ -41,14 +46,15 @@ function HomeC() {
 }
 async function getData(param,callback)
 {
+    console.log(param);
     const w = [];
     const {db, query, collection, where, getDocs} = appDB;
     const userCollectionRef = collection(db, "users");
-    const q = query(userCollectionRef, where("category", "==", "worker"));
+    const q = query(userCollectionRef,where("catogory", "==","workers"),where("locality", "==", param.locality),where("district", "==", param.district),where("state", "==", param.state));
     const docs = await getDocs(q);
     docs.forEach(doc => w.push(doc.data()));
       console.log("tom");
-     console.log(w);
+      console.log(w);
      callback(w);
  
 }

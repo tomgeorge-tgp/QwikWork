@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useState} from 'react';
 import img from "../assest/tom.jpg";
 import { useAuth } from "../firebase/AuthContext";
 import { Route, Redirect } from "react-router-dom";
@@ -9,7 +9,18 @@ import tool from "../assest/tool.png";
 
 function WorkerHome()
 {
-    const { loggedIn } = useAuth();
+   
+  const [editMode, setEditMode] = useState(false);
+  const [image,setImage]=useState(null);
+  const [sample,setSample]=useState("");
+  const handleChange =e=>{
+    if(e.target.file[0])
+    {
+
+    }
+  };
+    const { loggedIn,user} = useAuth();
+    console.log(user);
     if (!loggedIn) return <Redirect to="/workerSignIn" />;
        else{
     return(
@@ -28,12 +39,12 @@ function WorkerHome()
              </div>
              <div className="col-md-6">
                <div className="profile-head">
-                   <input className="name" type="text" id="name" name="name" value="TOM GEORGE"  disableUnderline={true} readOnly/>
-                   <input className="work" type="text" id="work" name="work" value="Developer"  disableUnderline={true} readOnly/>
+                   <input className="name" type="text" id="name" name="name" value={sample}  onChange={()=>{}}  />
+                   <input className="work" type="text" id="work" name="work" value="Developer"  disableUnderline={true} />
                  <p className="profile-rating mt-3 mb-5">
                    RANKING:<span>7/10</span>
                  </p>
-                 <textarea className="description" id="description" name="description" rows="4" cols="75" value="At w3schools.com you will learn how to make a website. They offer free tutorials in all web development technologies." disableUnderline={true} readOnly/>
+                 <textarea className="description" id="description" name="description" rows="4" cols="75" value="At w3schools.com you will learn how to make a website. They offer free tutorials in all web development technologies." disableUnderline={true}/>
                 
                  <ul className="nav nav-tab" role="tablist">
                    <li className="nav-item">
@@ -49,12 +60,12 @@ function WorkerHome()
              </div>
            
              <div className="col-md-2">
-               <input
-              //  onSubmit={};
-                 type="button"
-                 className="profile-edit-btn"
-                 value="Edit Profile"
-               />
+
+               {!editMode&&<button className="profile-edit-btn" onClick={(e)=>{e.preventDefault();setEditMode(true)}}>Edit Profile</button>}
+               {editMode&&<button className="profile-edit-btn" onClick={(e)=>{e.preventDefault();setEditMode(false)}}>Save Profile</button>}
+
+                
+                 
              </div>
              
              <div className="row">
@@ -64,11 +75,11 @@ function WorkerHome()
                  {/* <div className="col-md-4"> */}
                    <div>
                    
-                     <p className=""><i className="px-2 fa-solid fa-envelope"/> tomgeorge4187@gmail.com </p>
+                     <p className=""><i className="px-2 fa-solid fa-envelope"/> {user.data.email} </p>
                    </div>
                    <div>
                      
-                     <p><i class="px-2 fas fa-phone-alt"></i> 9999999999</p>
+                     <p><i class="px-2 fas fa-phone-alt"></i> {user.data.phoneNumber}</p>
                    </div>
                    <div>
                      

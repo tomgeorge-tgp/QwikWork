@@ -10,14 +10,14 @@ function AddressBar(props) {
        
     
         locality:Yup.string()
-        .min(15,'Must be 15 character or less')
+        .max(15,'Must be 15 character or less')
         .required(' Required'),
         district:Yup.string()
-        .min(15,'Must be 15 character or less')
+        .max(15,'Must be 15 character or less')
         .required('Required'),
     
         state:Yup.string()
-        .min(15,'Must be 15 character or more')
+        .max(15,'Must be 15 character or more')
         .required(' Required'),
     
         
