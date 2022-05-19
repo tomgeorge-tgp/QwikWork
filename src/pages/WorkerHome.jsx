@@ -14,7 +14,6 @@ function WorkerHome() {
   else {
     return (
       <>
-        {console.log("###")}
         <form>
           <div className="container emp-profile">
             <div className="row">
@@ -32,7 +31,7 @@ function WorkerHome() {
                     name="name"
                     defaultValue="TOM GEORGE"
                     disableUnderline={true}
-                    readOnly={editMode}
+                    readOnly={!editMode}
                   />
                   <input
                     className="work"
@@ -41,7 +40,7 @@ function WorkerHome() {
                     name="work"
                     defaultValue="Developer"
                     disableUnderline={true}
-                    readOnly={editMode}
+                    readOnly={!editMode}
                   />
                   <p className="profile-rating mt-3 mb-5">
                     RANKING:<span>7/10</span>
@@ -54,7 +53,7 @@ function WorkerHome() {
                     cols="75"
                     defaultValue="At w3schools.com you will learn how to make a website. They offer free tutorials in all web development technologies."
                     disableUnderline={true}
-                    readOnly={editMode}
+                    readOnly={!editMode}
                   />
 
                   <ul className="nav nav-tab" role="tablist">
@@ -68,11 +67,10 @@ function WorkerHome() {
                 <input
                   onClick={() => {
                     setEditMode(!editMode);
-                    console.log("HEllo ", editMode);
                   }}
                   type="button"
                   className="profile-edit-btn"
-                  defaultValue="Edit Profile"
+                  defaultValue={editMode ? "Save" : "Edit Profile"}
                 />
               </div>
 
@@ -102,7 +100,7 @@ function WorkerHome() {
                         name="address"
                         // defaultValue="********"
                         disableUnderline={true}
-                        readOnly={editMode}
+                        readOnly={!editMode}
                       />
                     </p>
                   </div>
@@ -116,7 +114,7 @@ function WorkerHome() {
                         name="place"
                         defaultValue="************"
                         disableUnderline={true}
-                        readOnly={editMode}
+                        readOnly={!editMode}
                       />
                     </p>
                   </div>
