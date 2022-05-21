@@ -2,13 +2,18 @@ import React, {useEffect, useState} from "react";
 import img from "../assest/tom.jpg";
 import { Row,Container,Col } from 'react-bootstrap';
 import { appDB } from "../firebase";
+import { useAuth } from "../firebase/AuthContext";
 import Navbar from "../components/Navbar";
 import Card from "../components/Card";
 import Sidebar from "../components/SideBar";
 import AddressBar from "../components/AddressBar";
 import "../components/Css/CustomerHome.css";
+//import admin from 'firebase-admin';
+
+
 function HomeC() {
   const [workers, setWorkers] = useState([]);
+  const { user } = useAuth();
   const [values,setValues]=useState([]);
    useEffect(() => getData(values, (w) => setWorkers(w)), [])
   return (
@@ -29,7 +34,9 @@ function HomeC() {
       <Row>
       {workers.length > 0 && workers.map((worker, index) => {
         console.log(index, worker);
-        return(<Col key={index} xl={4} lg={6} md={6} sm={12} ><a href={'#'}><Card {...worker}/></a></Col>)       
+        return(<Col key={index} xl={4} lg={6} md={6} sm={12} ><a href={'#'}><Card {...worker}
+               
+        /></a></Col>)       
       }
       )}
        
@@ -58,4 +65,12 @@ async function getData(param,callback)
      callback(w);
  
 }
+
+// async function searchWorker(query)
+// {
+//   console.log(query);
+//   const {fullTextSearch} = appDB;
+//   const results = await fullTextSearch("en", query);
+//   console.log(results);
+// }
 export default HomeC

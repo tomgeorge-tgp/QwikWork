@@ -12,16 +12,19 @@ export const SidebarData=[
         //icon:<HomeIcon/>,
         link:"/home"
     },
+
     {
         title:"Painter",
         //icon:<HomeIcon/>,
         link:"/home"
     },
+
     {
         title:"Welder ",
         //icon:<HomeIcon/>,
         link:"/home"
     },
+    
     {
         title:"Plumber",
        // icon:<HomeIcon/>,

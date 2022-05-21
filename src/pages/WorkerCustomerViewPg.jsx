@@ -55,19 +55,8 @@ const imageListRef =ref(storage,"images/");
     district: user.data.district,
     imageUrl: user.data.imageUrl,
   };
-  useEffect(()=>{
-    listAll(imageListRef).then((responce)=>{
-      console.log("responce");
-      console.log(responce);
-      responce.items.forEach((item)=>{
-        getDownloadURL(item).then((url)=>{
-          setImageList((prev)=> [...prev,url]);
-        });
-      });
-    });
-  },[]);
-  console.log("imageListRef");
-  console.log(imageListRef);
+  
+  
   if (!loggedIn) return <Redirect to="/workerSignIn" />;
   return (
     <>
@@ -76,8 +65,7 @@ const imageListRef =ref(storage,"images/");
           <div className="row">
             <div className="col-md-4">
               <div className="profile-img " style={{ position: "relative" }}>
-                 {console.log("image")}
-                 {  console.log(dataValues.imageUrl)}
+               
                 <img src={dataValues.imageUrl} alt="img" />
                  {/* {imageList.map((url)=>{
                    if(url==="https://firebasestorage.googleapis.com/v0/b/auth-development-4cccd.appspot.com/o/images%2Fcustomer.png7d3e244e-3c87-4f38-8c96-2e3d60f3149c?alt=media&token=a633f966-81f0-4557-b133-eb7d7835fbec"){
@@ -189,51 +177,13 @@ const imageListRef =ref(storage,"images/");
                 onClick={async () => {
                   setEditMode(!editMode);
                   if (editMode) {
-                    if (image) {
-                       console.log(image);
-                      const imageRef = ref(
-                        storage,
-                        `images/${image.name + v4()}`
-                      );
-                      console.log("imageRef");
-                      console.log(imageRef);
-                      uploadBytes(imageRef, image).then((url) => {
-                        getDownloadURL(url.ref).then((dataimageUrl)=>{
-                       console.log("dataimageUrl");
-                       console.log(dataimageUrl);
-                       dataValues.imageUrl=dataimageUrl;
-                      
-                     });
-                       
-                        console.log("url");
-                        console.log(url);
-                        
-                        console.log("imageUrl");
-                        console.log(dataValues.imageUrl);
-                        setImageList((prev)=>[...prev,url]);
-                        
-                        console.log("imageList");
-
-                        console.log(imageList);
-                      });
+                   
                       
                     
                     }
-                    try {
-                      const userRef = doc(db, "users", user.uid);
-
-                      await setDoc(userRef, dataValues);
-                      console.log("Registered Successfully!");
-                      
-                     
-                      
-                      
-                      }
-                     catch (err) {
-                      console.log(err.message);
-                    }
+                    
                   }
-                }}
+                }
                 type="button"
                 className="profile-edit-btn"
                 defaultValue={editMode ? "Save" : "Edit Profile"}
