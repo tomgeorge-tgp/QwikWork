@@ -12,7 +12,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import tool from "../assest/tool.png";
 import { async } from "@firebase/util";
 
-function WorkerHome() {
+function WorkerCustomerViewPg() {
+    
   const { loggedIn, user } = useAuth();
   const { db, doc, setDoc } = appDB;
   
@@ -283,4 +284,4 @@ const imageListRef =ref(storage,"images/");
   );
 }
 
-export default WorkerHome;
+export default WorkerCustomerViewPg;

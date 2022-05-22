@@ -3,7 +3,7 @@ import img from "../assest/tom.jpg";
 import "./Css/Card.css"
 function Card(props)
 {
-    return(<div className="card-box">
+    return(<div className="card-box" >
         <div className="card">
         <div className="top">
         <div className="title">
