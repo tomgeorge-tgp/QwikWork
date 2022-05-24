@@ -41,6 +41,12 @@ import { appDB } from "../firebase";
                          phoneNumber: values.phoneNo,
                          email: values.email,
                          category:"worker",
+                         description:null,
+                         locality:null,
+                         district:null,
+                         state:null,
+                         skillList:[],
+
                        }
                        await setDoc(userRef, userInfo);
                        console.log("Registered Successfully!");

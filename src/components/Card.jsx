@@ -16,8 +16,8 @@ function Card(props)
         </div>
         <div className="bottom">
          <div className="info">
-          <p>{props.phoneNo}</p>
-          <p>{props.emailId}</p>
+          <p>{props.phoneNumber}</p>
+          <p>{props.email}</p>
           
          </div>
          <div className="rating">7/10</div>

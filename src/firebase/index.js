@@ -7,7 +7,7 @@ import { initializeApp } from "firebase/app";
 //import firebase from 'firebase/app';
 
 //https://firebase.google.com/docs/web/setup#available-libraries
-import { getFirestore, getDoc ,doc, setDoc, Timestamp, collection, query, where, getDocs } from "firebase/firestore";
+import { getFirestore, getDoc ,doc, setDoc, Timestamp, collection, query, where, getDocs,updateDoc } from "firebase/firestore";
 import {getStorage} from "firebase/storage";
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -55,6 +55,7 @@ const appDB = {
   doc,
   setDoc,
   getDoc,
+  updateDoc,
   getDocs,
   collection,
   query,

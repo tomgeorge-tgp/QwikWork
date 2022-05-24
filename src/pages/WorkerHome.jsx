@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { appDB, storage } from "../firebase";
+import React, { useEffect, useState,useRef } from "react";
+import { appDB, storage, } from "../firebase";
 import { ref, uploadBytes,listAll, getDownloadURL } from "firebase/storage";
 import { v4 } from "uuid";
 
@@ -14,22 +14,33 @@ import { async } from "@firebase/util";
 
 function WorkerHome() {
   const { loggedIn, user } = useAuth();
-  const { db, doc, setDoc } = appDB;
+  const { db, doc, setDoc,updateDoc } = appDB;
   
   const allInputs = { imgUrl: "" };
  
   
  
-  const [userUpdate, setUserUpdate] = useState({ user });
-  const [editMode, setEditMode] = useState(false);
+  //const [userUpdate, setUserUpdate] = useState({ user });
+ const [editMode, setEditMode] = useState(false);
 //image upload
-const [image, setImage] = useState(null);
-
-const [imageUrl, setImageUrl] = useState(allInputs);
+const dataValues = useRef({
+  name: user.data.name,
+  profession: user.data.profession || "",
+  category:user.data.category,
+  email: user.data.email,
+  phoneNumber: user.data.phoneNumber,
+  description: user.data.description|| "",
+  locality: user.data.locality|| "",
+  district: user.data.district|| "",
+  imageUrl: user.data.imageUrl || "",
+  skillList : user.data.skillList || []
+});
+//const[image,setImage]=useState(null);
+const [imageUrl, setImageUrl] = useState(user.data.imageUrl);
 const [imageList,setImageList]=useState([]);
 const imageListRef =ref(storage,"images/");
-
-  // Create a reference to the hidden file input element
+const image=useRef(null);
+   // Create a reference to the hidden file input element
   // const hiddenFileInput = React.useRef(null);
 
   // Programatically click the hidden file input element
@@ -44,28 +55,21 @@ const imageListRef =ref(storage,"images/");
   //   //props.handleFile(fileUploaded);
   // };
 
-  const dataValues = {
-    name: user.data.name,
-    profession: user.data.profession,
-    category:"worker",
-    email: user.data.email,
-    phoneNumber: user.data.phoneNumber,
-    description: user.data.description,
-    locality: user.data.locality,
-    district: user.data.district,
-    imageUrl: user.data.imageUrl,
-  };
-  useEffect(()=>{
-    listAll(imageListRef).then((responce)=>{
-      console.log("responce");
-      console.log(responce);
-      responce.items.forEach((item)=>{
-        getDownloadURL(item).then((url)=>{
-          setImageList((prev)=> [...prev,url]);
-        });
-      });
-    });
-  },[]);
+   //dataValues = 
+
+  // const handler = this;
+  // console.log('this',handler)
+  // useEffect(()=>{
+  //   listAll(imageListRef).then((responce)=>{
+  //     console.log("responce");
+  //     console.log(responce);
+  //     responce.items.forEach((item)=>{
+  //       getDownloadURL(item).then((url)=>{
+  //         setImageList((prev)=> [...prev,url]);
+  //       });
+  //     });
+  //   });
+  // },[]);
   console.log("imageListRef");
   console.log(imageListRef);
   if (!loggedIn) return <Redirect to="/workerSignIn" />;
@@ -77,8 +81,8 @@ const imageListRef =ref(storage,"images/");
             <div className="col-md-4">
               <div className="profile-img " style={{ position: "relative" }}>
                  {console.log("image")}
-                 {  console.log(dataValues.imageUrl)}
-                <img src={dataValues.imageUrl} alt="img" />
+                 {  console.log(dataValues.current.imageUrl)}
+                <img src={imageUrl} alt="img" />
                  {/* {imageList.map((url)=>{
                    if(url==="https://firebasestorage.googleapis.com/v0/b/auth-development-4cccd.appspot.com/o/images%2Fcustomer.png7d3e244e-3c87-4f38-8c96-2e3d60f3149c?alt=media&token=a633f966-81f0-4557-b133-eb7d7835fbec"){
                     console.log(url);
@@ -94,8 +98,8 @@ const imageListRef =ref(storage,"images/");
                   onChange={(e) => {
                     {
                       console.log(e.target.files[0]);
-                      setImage(e.target.files[0]);
-                      console.log(image);
+                      image.current=e.target.files[0];
+                      //console.log(dataValues.image);
                       
                       //e.target.files=null;
                     }
@@ -131,12 +135,14 @@ const imageListRef =ref(storage,"images/");
                   type="text"
                   id="fname"
                   name="name"
+                  placeholder="name"
                   defaultValue={user.data.name}
                   onChange={(e) => {
                     {
-                      dataValues.name = e.target.value;
+                      dataValues.current = {...dataValues.current, name: e.target.value };
+                      
                     }
-                    console.log(dataValues.name);
+                    console.log(dataValues.current.name);
                   }}
                   disableUnderline={true}
                   readOnly={!editMode}
@@ -147,12 +153,15 @@ const imageListRef =ref(storage,"images/");
                   type="text"
                   id="work"
                   name="work"
+                  placeholder="profession"
                   defaultValue={user.data.profession}
                   onChange={(e) => {
                     {
-                      dataValues.profession = e.target.value;
+                      // setDataValue(prevDatavalues => ({...prevDatavalues, profession : e.target.value }));
+                      dataValues.current = {...dataValues.current, profession: e.target.value };
+                      
                     }
-                    console.log(dataValues.profession);
+                    console.log(dataValues.current.profession);
                   }}
                   disableUnderline={true}
                   readOnly={!editMode}
@@ -164,14 +173,17 @@ const imageListRef =ref(storage,"images/");
                   className="description"
                   id="description"
                   name="description"
+                  placeholder="description"
                   rows="4"
                   cols="75"
                   defaultValue={user.data.description}
                   onChange={(e) => {
                     {
-                      dataValues.description = e.target.value;
+                      //  setDataValue(prevDatavalues => ({...prevDatavalues, description: e.target.value }));
+                      dataValues.current = {...dataValues.current, description: e.target.value };
+
                     }
-                    console.log(dataValues.description);
+                    console.log(dataValues.current.description);
                   }}
                   disableUnderline={true}
                   readOnly={!editMode}
@@ -187,45 +199,55 @@ const imageListRef =ref(storage,"images/");
             <div className="col-md-2">
               <input
                 onClick={async () => {
-                  setEditMode(!editMode);
+                  setEditMode(prevEditMode=>!prevEditMode);
                   if (editMode) {
+                    
+                    try {
+                      
+                       let dataImgUrl=dataValues.current.imageUrl;
                     if (image) {
                        console.log(image);
                       const imageRef = ref(
                         storage,
                         `images/${image.name + v4()}`
                       );
-                      console.log("imageRef");
-                      console.log(imageRef);
-                      uploadBytes(imageRef, image).then((url) => {
-                        getDownloadURL(url.ref).then((dataimageUrl)=>{
-                       console.log("dataimageUrl");
-                       console.log(dataimageUrl);
-                       dataValues.imageUrl=dataimageUrl;
-                      
-                     });
+                        console.log("imageRef");
+                        console.log(imageRef);
+                        const url=await uploadBytes(imageRef,image.current);
+                        
+                       dataImgUrl=await getDownloadURL(url.ref);
+                      //  console.log("dataimageUrl");
+                      //  console.log(dataimageUrl);
+                      // setDataValue(prevDatavalues => ({...prevDatavalues, imageUrl: dataImgUrl }))
+                      dataValues.current = {...dataValues.current, imageUrl: dataImgUrl };
+
+                        // dataValues.imageUrl=dataImgUrl;
+                      //  handler.forceUpdate();
+                      // setImageUrl(dataImgUrl);
+                    
                        
                         console.log("url");
                         console.log(url);
                         
-                        console.log("imageUrl");
-                        console.log(dataValues.imageUrl);
-                        setImageList((prev)=>[...prev,url]);
+                        console.log("dataValues");
+                        console.log(dataValues.current);
+                       // setImageList((prev)=>[...prev,url]);
                         
-                        console.log("imageList");
+                        //console.log("imageList");
 
-                        console.log(imageList);
-                      });
+                       // console.log(imageList);
+                      
+                    }
                       
                     
-                    }
-                    try {
+                    
+                   
                       const userRef = doc(db, "users", user.uid);
 
-                      await setDoc(userRef, dataValues);
+                      await updateDoc(userRef, dataValues.current);
                       console.log("Registered Successfully!");
                       
-                     
+                     setImageUrl(dataImgUrl)
                       
                       
                       }
@@ -266,8 +288,15 @@ const imageListRef =ref(storage,"images/");
                       id="address"
                       name="address"
                       defaultValue={user.data.locality}
+                      placeholder="locality"
                       disableUnderline={true}
                       readOnly={!editMode}
+                      onChange={(e) => {
+                    
+                      //  setDataValue(prevDatavalues => ({...prevDatavalues, address: e.target.value }));
+                      dataValues.current = {...dataValues.current, locality: e.target.value };
+
+                      }}
                     />
                   </p>
                 </div>
@@ -280,8 +309,15 @@ const imageListRef =ref(storage,"images/");
                       id="place"
                       name="place"
                       defaultValue={user.data.district}
+                      placeholder="district"
                       disableUnderline={true}
                       readOnly={!editMode}
+                      onChange={(e) => {
+                    
+                      //  setDataValue(prevDatavalues => ({...prevDatavalues, district: e.target.value }));
+                      dataValues.current = {...dataValues.current, district: e.target.value };
+
+                    }}
                     />
                   </p>
                 </div>
@@ -296,10 +332,15 @@ const imageListRef =ref(storage,"images/");
                       <div className="tab-item-wrapper ">
                         <ul
                           onInput={(e) => {
+                            const skillSet = [];
                             const skills = e.target.getElementsByTagName("li");
-                            //   console.log(skills)
                             for (let i = 0; i <= skills.length - 1; i++)
-                              console.log(skills[i].innerText);
+                              {
+                                 skillSet.push(skills[i].innerText)
+                              }
+                              console.log(skillSet)
+                              dataValues.current = {...dataValues.current, skillList: [...skillSet] };
+
                           }}
                           className="list-unstyled py-2"
                           contentEditable={true}

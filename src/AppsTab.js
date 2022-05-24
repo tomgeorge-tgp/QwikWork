@@ -13,7 +13,7 @@ import { appDB } from "./firebase";
   function AppsTabs() {
      
   const { loggedIn,user } = useAuth();
-  console.log(user?.data)
+  // console.log(user?.data)
   if (!loggedIn) return (<Redirect to="/workerSignIn" />);
   else if(user.data?.category==="customer") return (<CustomersTabs />)
   else if(user.data?.category==="worker") return (<WorkerTabs />)
