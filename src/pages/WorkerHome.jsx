@@ -24,7 +24,8 @@ function WorkerHome() {
  const [editMode, setEditMode] = useState(false);
 //image upload
 const dataValues = useRef({
-  name: user.data.name,
+  firstName: user.data.firstName,
+  lastName: user.data.lastName,
   profession: user.data.profession || "",
   category:user.data.category,
   email: user.data.email,
@@ -136,7 +137,7 @@ const image=useRef(null);
                   id="fname"
                   name="name"
                   placeholder="name"
-                  defaultValue={user.data.name}
+                  defaultValue={user.data.firstName+" "+user.data.lastName}
                   onChange={(e) => {
                     {
                       dataValues.current = {...dataValues.current, name: e.target.value };

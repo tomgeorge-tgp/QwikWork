@@ -1,9 +1,12 @@
 import React from "react";
 import img from "../assest/tom.jpg";
 import "./Css/Card.css"
+import {Link} from "react-router-dom";
+
 function Card(props)
 {
     return(<div className="card-box" >
+    <Link to={props.workerUrl}>
         <div className="card">
         <div className="top">
         <div className="title">
@@ -23,7 +26,7 @@ function Card(props)
          <div className="rating">7/10</div>
         </div>
       </div>
-
+</Link>
         </div>)
 }
 export default Card
