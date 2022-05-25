@@ -13,6 +13,7 @@ import { useAuthInit, AuthProvider } from "./firebase/AuthContext";
 
 function App() {
   const auth = useAuthInit();
+ 
   if (auth.loading) return <h3>Loading...</h3>;
   return (
     <AuthProvider value={auth}>
@@ -31,6 +32,7 @@ function App() {
                 CUSTOMER
               </Link>
             </li>
+            
           </ul>
 
           <Switch>

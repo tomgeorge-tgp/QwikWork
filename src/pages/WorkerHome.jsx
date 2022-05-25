@@ -119,8 +119,8 @@ const image=useRef(null);
                     cursor: "pointer",
                     margin: "0",
                     position: "absolute",
-                    top: "137px",
-                    right: "160px",
+                    top: "120px",
+                    right: "180px",
                     color: "#666666",
                     transition: " all .3s cubic-bezier(.175, .885, .32, 1.275)",
                   }}
@@ -139,9 +139,12 @@ const image=useRef(null);
                   placeholder="name"
                   defaultValue={user.data.firstName+" "+user.data.lastName}
                   onChange={(e) => {
+
                     {
-                      dataValues.current = {...dataValues.current, name: e.target.value };
-                      
+                      let text = e.target.value;
+                        const myArray = text.split(" ");
+                      dataValues.current = {...dataValues.current, firstName: myArray[0] };
+                      dataValues.current = {...dataValues.current, lastName: myArray[1] };
                     }
                     console.log(dataValues.current.name);
                   }}
@@ -355,13 +358,7 @@ const image=useRef(null);
                     </Tab>
                     <Tab eventKey="photos" title="PHOTOS">
                       <div className="tab-item-wrapper">
-                        <h4>Name : Alex</h4>
-                        <h5>Profession : FrontEnd Developer</h5>
-                        <p>
-                          Lorem ipsum dolor, sit amet consectetur adipisicing
-                          elit. Maxime libero vitae quia unde ex ducimus qui
-                          reiciendis dolore, cumque possimus.
-                        </p>
+                      
                       </div>
                     </Tab>
                   </Tabs>

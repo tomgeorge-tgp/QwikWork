@@ -14,8 +14,8 @@ body{
 }
 
 .profile-img img{
-    width:50%;
-    height:50%;
+    width:150px;
+    height:150px;
     
     float:left;
     border-radius: 20%;
