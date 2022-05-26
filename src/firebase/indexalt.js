@@ -11,13 +11,12 @@ import { getFirestore, getDoc ,doc, setDoc, Timestamp, collection, query, where,
 import {getStorage} from "firebase/storage";
 // Your web app's Firebase configuration
 const firebaseConfig = {
-    apiKey: "AIzaSyDdJcmygf6lSnfcumWuEvJSNaOxsXWqj7Q",
-    authDomain: "handyman-b0fbe.firebaseapp.com",
-    projectId: "handyman-b0fbe",
-    storageBucket: "handyman-b0fbe.appspot.com",
-    messagingSenderId: "635943009687",
-    appId: "1:635943009687:web:813c70bcf25b7ed05358d2",
-    measurementId: "G-3PXHQBKYG7"
+  apiKey: "AIzaSyBVlT8Xasn1dioTimcTERYgBHIsiQ50jp0",
+  authDomain: "auth-development-4cccd.firebaseapp.com",
+  projectId: "auth-development-4cccd",
+  storageBucket: "auth-development-4cccd.appspot.com",
+  messagingSenderId: "261429843675",
+  appId: "1:261429843675:web:2ec0e5a3bcd1594730defe"
 };
 
 // Initialize Firebase

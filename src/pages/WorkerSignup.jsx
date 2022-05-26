@@ -40,6 +40,7 @@ import { appDB } from "../firebase";
                          lastName: values.lastName,
                          phoneNumber: values.phoneNo,
                          email: values.email,
+                         profession:null,
                          category:"worker",
                          description:null,
                          locality:null,

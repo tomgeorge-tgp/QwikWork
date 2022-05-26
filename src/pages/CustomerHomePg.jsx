@@ -74,7 +74,9 @@ function HomeC() {
   return (
   <>    
       <div className="d-flex">
-      <Sidebar/>
+      <Sidebar
+        // onClick={console.log(val.title)}
+      />
       <div className="w-100">
       {/* <AddressBar onSubmit={async (values, { _setSubmitting }) => {
                    setValues(values);

@@ -9,7 +9,7 @@ function Sidebar()
     return(
         <div className="sidebar">
         <ul className="sidebarList">
-        
+
         {SidebarData.map((val,key)=>
         {
             return(<li
